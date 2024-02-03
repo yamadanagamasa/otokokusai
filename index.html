@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>64マススライドパズル</title>
+  <title>63マススライドパズル</title>
   <style>
     .puzzle-container {
       display: grid;
@@ -34,7 +34,7 @@
   const gridSize = 8;
 
   // パズルの初期状態
-  const initialPuzzle = Array.from({ length: gridSize * gridSize }, (_, index) => index + 1);
+  const initialPuzzle = Array.from({ length: gridSize * gridSize - 1 }, (_, index) => index + 1);
 
   // シャッフル関数
   function shuffleArray(array) {
@@ -55,7 +55,7 @@
       const piece = document.createElement('div');
       piece.classList.add('puzzle-piece');
       piece.textContent = number;
-      piece.addEventListener('click', () => handlePieceClick(index + 1));
+      piece.addEventListener('click', () => handlePieceClick(number));
 
       puzzleContainer.appendChild(piece);
     });
@@ -63,7 +63,7 @@
 
   // ピースがクリックされたときの処理
   function handlePieceClick(number) {
-    const emptyIndex = initialPuzzle.indexOf(gridSize * gridSize);
+    const emptyIndex = initialPuzzle.indexOf(gridSize * gridSize - 1);
     const clickedIndex = initialPuzzle.indexOf(number);
 
     if (isAdjacent(emptyIndex, clickedIndex)) {
