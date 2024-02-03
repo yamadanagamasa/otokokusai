@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>64 Puzzle</title>
+  <title>15 Puzzle</title>
   <style>
     .puzzle-container {
       display: grid;
-      grid-template-columns: repeat(8, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: 5px;
       max-width: 400px;
       margin: auto;
@@ -15,24 +15,14 @@
 
     .puzzle-piece {
       width: 100%;
-      height: 50px;
+      height: 100px;
       display: flex;
       justify-content: center;
       align-items: center;
-      font-size: 16px;
-      font-weight: bold;
+      font-size: 24px;
+      background-color: #eee;
       cursor: pointer;
-      border: 1px solid #ddd;
-      background-color: #f0f0f0;
     }
-
-    /* Define colors for each number */
-    .color-1 { background-color: #ff9999; }
-    .color-2 { background-color: #99ff99; }
-    .color-3 { background-color: #9999ff; }
-    .color-4 { background-color: #ffff99; }
-    .color-5 { background-color: #ff99ff; }
-    .color-6 { background-color: #99ffff; }
   </style>
 </head>
 <body>
@@ -50,14 +40,15 @@
 
   // Initialize the puzzle
   function initializePuzzle() {
-    const numbers = Array.from({ length: 64 }, (_, index) => index % 6 + 1); // 1 to 6, repeating
+    const numbers = Array.from({ length: 15 }, (_, index) => index + 1);
     shuffle(numbers);
+    numbers.push(null); // Adding null for the empty space
 
     const puzzleContainer = document.getElementById('puzzle-container');
 
     numbers.forEach((number, index) => {
       const piece = document.createElement('div');
-      piece.className = `puzzle-piece color-${number}`;
+      piece.className = 'puzzle-piece';
       piece.textContent = number;
       piece.addEventListener('click', () => handlePieceClick(index));
       puzzleContainer.appendChild(piece);
@@ -84,11 +75,11 @@
 
   // Check if the move is valid
   function isMoveValid(index, emptyIndex) {
-    const row = Math.floor(index / 8);
-    const col = index % 8;
+    const row = Math.floor(index / 4);
+    const col = index % 4;
 
-    const emptyRow = Math.floor(emptyIndex / 8);
-    const emptyCol = emptyIndex % 8;
+    const emptyRow = Math.floor(emptyIndex / 4);
+    const emptyCol = emptyIndex % 4;
 
     return (
       (Math.abs(row - emptyRow) === 1 && col === emptyCol) ||
@@ -102,7 +93,7 @@
     const pieces = puzzleContainer.children;
 
     for (let i = 0; i < pieces.length - 1; i++) {
-      if (parseInt(pieces[i].textContent) !== (i % 6) + 1) {
+      if (parseInt(pieces[i].textContent) !== i + 1) {
         return false;
       }
     }
