@@ -1,93 +1,118 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="en">
 <head>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>文化祭</title>
-    <!-- <link href="https://unpkg.com/nes.css/css/nes.css" rel="stylesheet" /> -->
-    <link rel="stylesheet" href="css/index.css">
-    <link rel="stylesheet" href="css/sai.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Roboto:wght@100&family=Workbench&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Honk&family=Oswald:wght@700&family=Roboto:wght@100&family=Workbench&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Honk&family=Oswald:wght@700&family=Roboto:wght@100&family=Workbench&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>64 Puzzle</title>
+  <style>
+    .puzzle-container {
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      gap: 5px;
+      max-width: 400px;
+      margin: auto;
+    }
+
+    .puzzle-piece {
+      width: 100%;
+      height: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      border: 1px solid #ddd;
+      background-color: #f0f0f0;
+    }
+
+    /* Define colors for each number */
+    .color-1 { background-color: #ff9999; }
+    .color-2 { background-color: #99ff99; }
+    .color-3 { background-color: #9999ff; }
+    .color-4 { background-color: #ffff99; }
+    .color-5 { background-color: #ff99ff; }
+    .color-6 { background-color: #99ffff; }
+  </style>
 </head>
 <body>
-    <header class="header">
-        <div class="header-inner">
-          <div class="logo">
-            <h2 >OTOKOKUSAI</h2>
-          </div>
-          <div class="header01-list ">
-            <div style="color: rgb(0, 0, 0);"><h2>DAY1</h2></div>
-            <div style="color: rgb(0, 0, 0);"><h2>DAY2</h2></div>
-            <div style="color: rgb(0, 0, 0)"><h2>MAPS</h2></div>
-            <div style="color: rgb(0, 0, 0);"><h2>GOODS</h2></div>
-            <div style="color: rgb(0, 0, 0);"><h2>挨拶</h2></div>
-          </div>
-        </div>
-      </header>
-    <div class="main">
-        <br><br>
-        <h1 class="title">
-            <div style="color: rgb(82, 79, 175);">THE DIE </div> 
-            <div style="color: red;">WAS</div> 
-            <div style="color: rgb(223, 213, 104);">CAST</div> 
-            </h1><br>
-        <div class="sai"></div>
-    </div>
-    <div class="nakami">
-        <h1 class="subtitle">DAY1</h1> <div class="minisai"></div>
-        <br><br><br><br><br><br>
-        <h1 class="subtitle">DAY2</h1>
-        <br><br><br><br><br><br>
-        <h1 class="subtitle">MAPS</h1>
-        <br><br><br><br><br><br>
-        <h1 class="subtitle">GOODS</h1>
-        <br><br><br><br><br><br>
-        <div class="nes-table-responsive">
-            <table class="nes-table is-bordered is-centered">
-              <thead>
-                <tr>
-                  <th>Table.is-bordered</th>
-                  <th>Table.is-centered</th>
-                  <th>Table.is-centered</th>
-                  <th>Table.is-centered</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Thou hast had a good morning</td>
-                  <td>Thou hast had a good afternoon</td>
-                  <td>Thou hast had a good evening</td>
-                  <td>Thou hast had a good night</td>
-                </tr>
-                <tr>
-                  <td>Thou hast had a good morning</td>
-                  <td>Thou hast had a good afternoon</td>
-                  <td>Thou hast had a good evening</td>
-                  <td>Thou hast had a good night</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        <h1>OTOKOKUSAI</h1>
-        <h1>OTOKOKUSAI</h1>
-        <h1>OTOKOKUSAI</h1>
-        <h1>OTOKOKUSAI</h1>
-        <h1>OTOKOKUSAI</h1>
-        <h1>OTOKOKUSAI</h1>
-        <h1>OTOKOKUSAI</h1>
-        <h1>OTOKOKUSAI</h1>
-    </div>
-    <footer class="footer">
-        <p class="copyright">&copy;YamadanNagmasa</p>
-        <ul class="md-flex">
-          <li></li>
-        </ul>
-      </footer>
+
+<div class="puzzle-container" id="puzzle-container"></div>
+
+<script>
+  // Fisher-Yates Shuffle Algorithm
+  function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+  }
+
+  // Initialize the puzzle
+  function initializePuzzle() {
+    const numbers = Array.from({ length: 64 }, (_, index) => index % 6 + 1); // 1 to 6, repeating
+    shuffle(numbers);
+
+    const puzzleContainer = document.getElementById('puzzle-container');
+
+    numbers.forEach((number, index) => {
+      const piece = document.createElement('div');
+      piece.className = `puzzle-piece color-${number}`;
+      piece.textContent = number;
+      piece.addEventListener('click', () => handlePieceClick(index));
+      puzzleContainer.appendChild(piece);
+    });
+  }
+
+  // Handle piece click event
+  function handlePieceClick(index) {
+    const puzzleContainer = document.getElementById('puzzle-container');
+    const pieces = puzzleContainer.children;
+
+    const emptyIndex = Array.from(pieces).findIndex(piece => piece.textContent === '');
+
+    if (isMoveValid(index, emptyIndex)) {
+      // Swap the pieces
+      [pieces[index].textContent, pieces[emptyIndex].textContent] = [pieces[emptyIndex].textContent, pieces[index].textContent];
+    }
+
+    // Check if the puzzle is solved
+    if (isPuzzleSolved()) {
+      alert('Congratulations! Puzzle solved!');
+    }
+  }
+
+  // Check if the move is valid
+  function isMoveValid(index, emptyIndex) {
+    const row = Math.floor(index / 8);
+    const col = index % 8;
+
+    const emptyRow = Math.floor(emptyIndex / 8);
+    const emptyCol = emptyIndex % 8;
+
+    return (
+      (Math.abs(row - emptyRow) === 1 && col === emptyCol) ||
+      (Math.abs(col - emptyCol) === 1 && row === emptyRow)
+    );
+  }
+
+  // Check if the puzzle is solved
+  function isPuzzleSolved() {
+    const puzzleContainer = document.getElementById('puzzle-container');
+    const pieces = puzzleContainer.children;
+
+    for (let i = 0; i < pieces.length - 1; i++) {
+      if (parseInt(pieces[i].textContent) !== (i % 6) + 1) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+  // Initialize the puzzle when the page loads
+  window.addEventListener('load', initializePuzzle);
+</script>
+
 </body>
 </html>
-    
