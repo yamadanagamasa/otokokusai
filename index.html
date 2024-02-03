@@ -8,86 +8,66 @@
     <!-- <link href="https://unpkg.com/nes.css/css/nes.css" rel="stylesheet" /> -->
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/sai.css">
+    <link rel="stylesheet" href="css/parts.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Roboto:wght@100&family=Workbench&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Honk&family=Oswald:wght@700&family=Roboto:wght@100&family=Workbench&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Honk&family=Oswald:wght@700&family=Roboto:wght@100&family=Workbench&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Sawarabi+Mincho" rel="stylesheet">
+    <script>
+      function showRestTime() {
+        const now = new Date();
+        const goal = new Date(2024, 4, 31);
+
+        const restMillisecond = goal.getTime() - now.getTime();
+        const day = Math.floor(restMillisecond / 1000 / 60 / 60 / 24);
+        const hour = Math.floor(restMillisecond / 1000 / 60 / 60) % 24;
+        const minute = Math.floor(restMillisecond / 1000 / 60) % 60;
+        const second = Math.floor(restMillisecond / 1000) % 60;
+
+        document.getElementById('day').textContent = day;
+        document.getElementById('hour').textContent = hour;
+        document.getElementById('minute').textContent = String(minute).padStart(2, '0');
+        document.getElementById('second').textContent = String(second).padStart(2, '0');
+      }
+
+      setInterval(showRestTime, 1000);
+    </script>
 </head>
 <body>
-    <header class="header">
-        <div class="header-inner">
-          <div class="logo">
-            <h2 >OTOKOKUSAI</h2>
-          </div>
-          <div class="header01-list ">
-            <div style="color: rgb(0, 0, 0);"><h2>DAY1</h2></div>
-            <div style="color: rgb(0, 0, 0);"><h2>DAY2</h2></div>
-            <div style="color: rgb(0, 0, 0)"><h2>MAPS</h2></div>
-            <div style="color: rgb(0, 0, 0);"><h2>GOODS</h2></div>
-            <div style="color: rgb(0, 0, 0);"><h2>挨拶</h2></div>
-          </div>
-        </div>
-      </header>
-    <div class="main">
-        <br><br>
-        <h1 class="title">
-            <div style="color: rgb(82, 79, 175);">THE DIE </div> 
-            <div style="color: red;">WAS</div> 
-            <div style="color: rgb(223, 213, 104);">CAST</div> 
-            </h1><br>
-        <div class="sai"></div>
+  <header class="header">
+    <div class="header-inner">
+        <img src="img/logo.png" width="5%">
     </div>
-    <div class="nakami">
-        <h1 class="subtitle">DAY1</h1> <div class="minisai"></div>
-        <br><br><br><br><br><br>
-        <h1 class="subtitle">DAY2</h1>
-        <br><br><br><br><br><br>
-        <h1 class="subtitle">MAPS</h1>
-        <br><br><br><br><br><br>
-        <h1 class="subtitle">GOODS</h1>
-        <br><br><br><br><br><br>
-        <div class="nes-table-responsive">
-            <table class="nes-table is-bordered is-centered">
-              <thead>
-                <tr>
-                  <th>Table.is-bordered</th>
-                  <th>Table.is-centered</th>
-                  <th>Table.is-centered</th>
-                  <th>Table.is-centered</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Thou hast had a good morning</td>
-                  <td>Thou hast had a good afternoon</td>
-                  <td>Thou hast had a good evening</td>
-                  <td>Thou hast had a good night</td>
-                </tr>
-                <tr>
-                  <td>Thou hast had a good morning</td>
-                  <td>Thou hast had a good afternoon</td>
-                  <td>Thou hast had a good evening</td>
-                  <td>Thou hast had a good night</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        <h1>OTOKOKUSAI</h1>
-        <h1>OTOKOKUSAI</h1>
-        <h1>OTOKOKUSAI</h1>
-        <h1>OTOKOKUSAI</h1>
-        <h1>OTOKOKUSAI</h1>
-        <h1>OTOKOKUSAI</h1>
-        <h1>OTOKOKUSAI</h1>
-        <h1>OTOKOKUSAI</h1>
-    </div>
-    <footer class="footer">
-        <p class="copyright">&copy;YamadanNagmasa</p>
-        <ul class="md-flex">
-          <li></li>
-        </ul>
-      </footer>
+  </header>
+  <div class="maintitle">
+    <div class="side"><p></p></div>
+    <div class="box1 hannari">
+    <p>さいは投げられた。</p></div>
+    <div class="side"><p></p></div>
+  </div>
+  <div class="nakami">
+    <!-- <h1 class="subtitle">DAY1</h1> <div class="minisai"></div>
+    <br><br><br><br><br><br>
+    <h1 class="subtitle">DAY2</h1>
+    <br><br><br><br><br><br>
+    <h1 class="subtitle">MAPS</h1>
+    <br><br><br><br><br><br>
+    <h1 class="subtitle">GOODS</h1>
+    <br><br><br><br><br><br> -->
+    <div class="hannari subtitle box17">
+    <p>4月31日まで、</p>
+<p class="timer">残り
+   <span id="day"></span>日と
+   <span id="hour"></span>時間
+   <span id="minute"></span>分
+   <span id="second"></span>秒
+</p>
+</div>
+</div>
+  <footer class="footer">
+    <p class="copyright">&copy;Otokokusai</p>
+    <ul class="md-flex">
+      <li></li>
+    </ul>
+  </footer>
 </body>
 </html>
-    
