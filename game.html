@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Button Tetris</title>
+  <style>
+    body {
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f0f0f0;
+    }
+
+    canvas {
+        margin-top: 10px;
+        margin-left: 40%;
+        margin-right: 40%;
+      border: 1px solid #ccc;
+    }
+
+    #controls {
+        margin-left: 40%;
+        margin-right: 40%;
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+    }
+
+    button {
+      padding: 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="tetrisCanvas" width="300" height="600"></canvas>
+<div id="controls">
+  <button onclick="moveLeft()">Left</button>
+  <button onclick="moveRight()">Right</button>
+  <button onclick="rotate()">Rotate</button>
+  <button onclick="moveDown()">Down</button>
+  <div id="level">Level: 1</div>
+</div>
+
+
+<script>
+  const canvas = document.getElementById('tetrisCanvas');
+  const context = canvas.getContext('2d');
+  const levelDisplay = document.getElementById('level');
+
+  const ROWS = 20;
+  const COLUMNS = 10;
+  const BLOCK_SIZE = 30;
+  const COLORS = ['#EDD457', '#DA3C27', '#1E3E6F', '#E9EDEF', '#1E3E6F', '#DA3C27', '#EDD457'];
+
+  let board = Array.from({ length: ROWS }, () => Array(COLUMNS).fill(0));
+  let currentPiece;
+  let intervalId;
+  let level = 1;
+  let speed = 500;
+
+  function drawBlock(x, y, color) {
+    context.fillStyle = color;
+    context.fillRect(x * BLOCK_SIZE, y * BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
+    context.strokeStyle = '#000';
+    context.strokeRect(x * BLOCK_SIZE, y * BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
+  }
+
+  function drawBoard() {
+    board.forEach((row, rowIndex) => {
+      row.forEach((value, colIndex) => {
+        if (value !== 0) {
+          drawBlock(colIndex, rowIndex, COLORS[value - 1]);
+        }
+      });
+    });
+  }
+
+  function draw() {
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    drawBoard();
+    drawPiece();
+  }
+
+  function drawPiece() {
+    currentPiece.shape.forEach((row, rowIndex) => {
+      row.forEach((value, colIndex) => {
+        if (value !== 0) {
+          drawBlock(currentPiece.x + colIndex, currentPiece.y + rowIndex, COLORS[currentPiece.color - 1]);
+        }
+      });
+    });
+  }
+
+  function moveDown() {
+    currentPiece.y++;
+    if (collision()) {
+      currentPiece.y--;
+      placePiece();
+      checkForLines();
+      spawnPiece();
+      if (collision()) {
+        // Game Over
+        clearInterval(intervalId);
+        alert('Game Over!');
+      }
+    }
+  }
+
+  function moveLeft() {
+    currentPiece.x--;
+    if (collision()) {
+      currentPiece.x++;
+    }
+  }
+
+  function moveRight() {
+    currentPiece.x++;
+    if (collision()) {
+      currentPiece.x--;
+    }
+  }
+
+  function rotate() {
+    const originalShape = currentPiece.shape;
+    const rotatedShape = [];
+    for (let row = 0; row < originalShape[0].length; row++) {
+      rotatedShape[row] = [];
+      for (let col = 0; col < originalShape.length; col++) {
+        rotatedShape[row][col] = originalShape[originalShape.length - col - 1][row];
+      }
+    }
+    currentPiece.shape = rotatedShape;
+    if (collision()) {
+      currentPiece.shape = originalShape;
+    }
+  }
+
+  function collision() {
+    for (let row = 0; row < currentPiece.shape.length; row++) {
+      for (let col = 0; col < currentPiece.shape[row].length; col++) {
+        if (
+          currentPiece.shape[row][col] !== 0 &&
+          (board[currentPiece.y + row] && board[currentPiece.y + row][currentPiece.x + col]) !== 0
+        ) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  function placePiece() {
+    currentPiece.shape.forEach((row, rowIndex) => {
+      row.forEach((value, colIndex) => {
+        if (value !== 0) {
+          board[currentPiece.y + rowIndex][currentPiece.x + colIndex] = currentPiece.color;
+        }
+      });
+    });
+  }
+
+  function checkForLines() {
+    for (let row = ROWS - 1; row >= 0; row--) {
+      if (board[row].every(cell => cell !== 0)) {
+        board.splice(row, 1);
+        board.unshift(Array(COLUMNS).fill(0));
+        updateLevelAndSpeed();
+      }
+    }
+  }
+
+  function updateLevelAndSpeed() {
+    level++;
+    speed = Math.max(100, 500 - (level - 1) * 50);
+    levelDisplay.innerText = `Level: ${level}`;
+    clearInterval(intervalId);
+    intervalId = setInterval(() => {
+      moveDown();
+      draw();
+    }, speed);
+  }
+
+  function spawnPiece() {
+    const randomIndex = Math.floor(Math.random() * COLORS.length);
+    currentPiece = {
+      shape: getRandomShape(),
+      x: Math.floor(COLUMNS / 2) - 1,
+      y: 0,
+      color: randomIndex + 1,
+    };
+  }
+
+  function getRandomShape() {
+    const shapes = [
+      [[1, 1, 1, 1]],
+      [[1, 1], [1, 1]],
+      [[1, 1, 1], [0, 1, 0]],
+      [[1, 1, 1], [1, 0, 0]],
+      [[1, 1, 1], [0, 0, 1]],
+      [[1, 1, 0], [0, 1, 1]],
+      [[0, 1, 1], [1, 1, 0]],
+    ];
+    return shapes[Math.floor(Math.random() * shapes.length)];
+  }
+
+  spawnPiece();
+  intervalId = setInterval(() => {
+    moveDown();
+    draw();
+  }, speed);
+
+</script>
+
+</body>
+</html>
