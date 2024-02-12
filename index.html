@@ -14,7 +14,7 @@
     <script>
       function showRestTime() {
         const now = new Date();
-        const goal = new Date(2024, 4, 31);
+        const goal = new Date(2024, 4, 29);
 
         const restMillisecond = goal.getTime() - now.getTime();
         const day = Math.floor(restMillisecond / 1000 / 60 / 60 / 24);
@@ -39,10 +39,12 @@
   </header>
   <div class="maintitle">
     <div class="side">
-      <p class="yoko1">OTOKOKUSAI</p>
+      <!-- <p class="yoko1">OTOKOKUSAI</p> -->
     </div>
     <div class="box1 hannari">
-    <a href="game.html"　 ><p class="a-keshi">さいは投げられた。</p></a>
+    <a href="game.html">
+      <!-- <div class="sai"></div> -->
+      <p class="a-keshi">さいは投げられた</p></a>
   </div>
     <div class="side">
   </div>
@@ -57,8 +59,8 @@
     <h1 class="subtitle">GOODS</h1>
     <br><br><br><br><br><br> -->
   <div class="margin-side">
-    <div class="hannari subtitle box17">
-          <p>4月31日まで、</p>
+    <div class="hannari  box17">
+          <p>4月29日まで、</p>
       <p class="timer">残り
         <span id="day"></span>日と
         <span id="hour"></span>時間
@@ -67,6 +69,7 @@
       </p>
     </div>
   </div>
+  
 </div>
   <footer class="footer">
     <p class="copyright">&copy;Otokokusai</p>

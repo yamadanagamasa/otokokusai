@@ -2,6 +2,9 @@ html {
   background-color: rgb(255, 255, 255);
   font-family: 'Oswald', sans-serif;
 }
+body{
+  margin: 0%;
+}
 .header {
     box-sizing: border-box;
     width: 100%;
@@ -16,22 +19,39 @@ html {
 .header-inner {
     text-align: center;
   }
+  @media (max-height:900px) {
   .maintitle {
     margin-top: 3%;
     line-height: 500px;
     background-image:url("../img/main.jpg");
     background-size:25%;
-    height:100%;
     background-attachment: fixed;
     background-position: center;
     display: flex;
     justify-content: space-between;
+    font-size: 25px;
   }
   .side {
     width: 5%;
     text-align: center;
     background-color: rgb(255, 255, 255);
   }
+  }
+  @media (min-height:900px) {
+    .maintitle {
+      margin-top: 6%;
+      line-height: 900px;
+      background-image:url("../img/main.jpg");
+      background-size:25%;
+      height:100%;
+      background-attachment: fixed;
+      background-position: center;
+      display: flex;
+      justify-content: space-between;
+      font-size: 30px;
+    }
+  }
+
   .footer {
     padding: 2rem;
     font-size: 15px;

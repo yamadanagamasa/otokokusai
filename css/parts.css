@@ -6,12 +6,12 @@
       font-size: 40px;
   }
 .box1 {
-    padding: 0.5em 2em;
+    padding: 0em 2em;
     height: 12%;
     text-align: center;
     align-items: center;
     font-weight: bold;
-    /* border: solid 1px #000000; */
+    border: 0px ;
     background-color: rgb(255, 255, 255);
 }
 .hannari{
@@ -40,10 +40,23 @@
     margin: 0; 
     padding: 0;
 }
-
+@media (max-height:900px) {
 .margin-side{
 margin-left: 10%;
 margin-right: 10%;
+}
+.box17{
+  font-size: 40px;
+}
+}
+@media (min-height:900px) {
+.box17{
+  font-size: 50px;
+  /* transform: rotate( 90deg ); */
+}
+.box17 p{
+  /* transform: rotate( 90deg ); */
+}
 }
 
 .yoko1{
