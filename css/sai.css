@@ -77,7 +77,7 @@
     width:40px;
     height:40px;
     border-radius:5px;
-    border:0px solid;
+    border:0.1px solid ;
     background-color:#ffffff;
     animation:  rotation 4s ease 0s infinite alternate none running;
   }

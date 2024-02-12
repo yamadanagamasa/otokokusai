@@ -4,6 +4,7 @@ html {
 }
 body{
   margin: 0%;
+  font-family: "Sawarabi Mincho"; 
 }
 .header {
     box-sizing: border-box;
@@ -24,6 +25,7 @@ body{
     /* margin-top: 3%; */
     line-height: 500px;
     background-image:url("../img/main.jpg");
+    animation: bgiLoop 500s linear infinite;
     background-size:25%;
     background-attachment: fixed;
     background-position: center;
@@ -31,6 +33,10 @@ body{
     justify-content: space-between;
     font-size: 25px;
   }
+  @keyframes bgiLoop {
+    0% { background-position: 0 0;}
+  100% { background-position: -50000px 50000px;}
+}
   .side {
     width: 5%;
     text-align: center;
@@ -38,17 +44,41 @@ body{
   }
   }
   @media (min-height:900px) {
+    .header-inner img{
+      width: 10%;
+    }
     .maintitle {
-      margin-top: 5%;
+      margin-top: 12%;
       background-image:url("../img/main.jpg");
-      background-size:25%;
+      background-size:40%;
       font-size: 50px;
       line-height: 100px;
+      animation: bgiLoop 500s linear infinite;
     }
+    @keyframes bgiLoop {
+      0% { background-position: 0 0;}
+    100% { background-position: -50000px 50000px;}
+  }
     .box1{
-      margin-left: 10%;
-      margin-right: 10%;
+      margin-left: 5%;
+      margin-right: 5%;
+      animation:  rotation1 1s ease 0s 1 normal none running;
     }
+    @keyframes rotation1 {
+      0% {
+        transform: scale(1) rotate(0deg);
+      }
+    50%{
+      transform: scale(1) rotate(15deg);
+      }
+    /* 75%{
+      transform: scale(1) rotate(-10deg);
+      } */
+    100%{
+      transform: scale(1) rotate(0deg);
+      }
+    }
+  
   .yohaku{
     line-height: 500px;
     text-align: center;
