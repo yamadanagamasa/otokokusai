@@ -1,1 +1,100 @@
-['#EDD457', '#DA3C27', '#1E3E6F', '#E9EDEF', '#1E3E6F', '#DA3C27', '#EDD457'];
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>サイコロスライドパズル</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        #puzzle-container {
+            display: grid;
+            grid-template-columns: repeat(3, 100px);
+            gap: 5px;
+        }
+        .puzzle-piece {
+            width: 100px;
+            height: 100px;
+            background-size: cover;
+            cursor: pointer;
+            transition: transform 0.3s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <div id="puzzle-container"></div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const puzzleContainer = document.getElementById("puzzle-container");
+
+            const puzzleSize = 3;
+            const totalPieces = puzzleSize * puzzleSize;
+            const emptyIndex = totalPieces - 1;
+            const pieceWidth = 100;
+
+            const pieces = Array.from({ length: totalPieces }).map((_, index) => {
+                const piece = document.createElement("div");
+                piece.classList.add("puzzle-piece");
+                piece.style.backgroundImage = `url('path/to/your/dice-image.jpg')`;
+                piece.style.backgroundPosition = `-${pieceWidth * (index % puzzleSize)}px -${pieceWidth * Math.floor(index / puzzleSize)}px`;
+                piece.addEventListener("click", () => movePiece(index));
+                puzzleContainer.appendChild(piece);
+                return piece;
+            });
+
+            function movePiece(index) {
+                const emptyRow = Math.floor(emptyIndex / puzzleSize);
+                const emptyCol = emptyIndex % puzzleSize;
+                const clickedRow = Math.floor(index / puzzleSize);
+                const clickedCol = index % puzzleSize;
+
+                if ((Math.abs(emptyRow - clickedRow) === 1 && emptyCol === clickedCol) ||
+                    (Math.abs(emptyCol - clickedCol) === 1 && emptyRow === clickedRow)) {
+                    swapPieces(index, emptyIndex);
+                }
+            }
+
+            function swapPieces(index1, index2) {
+                const temp = pieces[index1].style.transform;
+                pieces[index1].style.transform = pieces[index2].style.transform;
+                pieces[index2].style.transform = temp;
+
+                // Swap positions in the array
+                [pieces[index1], pieces[index2]] = [pieces[index2], pieces[index1]];
+
+                // Update the empty index
+                emptyIndex = index1 === emptyIndex ? index2 : index1;
+
+                if (isPuzzleComplete()) {
+                    alert("Congratulations! Puzzle completed!");
+                    // You can add additional logic here for what happens when the puzzle is completed
+                }
+            }
+
+            function isPuzzleComplete() {
+                for (let i = 0; i < pieces.length - 1; i++) {
+                    const currentRow = Math.floor(i / puzzleSize);
+                    const currentCol = i % puzzleSize;
+                    if (parseInt(pieces[i].style.transform) !== (currentRow * pieceWidth) || parseInt(pieces[i].style.transform) !== (currentCol * pieceWidth)) {
+                        return false;
+                    }
+                }
+                return true;
+            }
+
+            // Shuffle the puzzle pieces initially
+            for (let i = totalPieces - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                swapPieces(i, j);
+            }
+        });
+    </script>
+</body>
+</html>
