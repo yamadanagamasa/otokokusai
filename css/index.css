@@ -21,7 +21,7 @@ body{
   }
   @media (max-height:900px) {
   .maintitle {
-    margin-top: 3%;
+    /* margin-top: 3%; */
     line-height: 500px;
     background-image:url("../img/main.jpg");
     background-size:25%;
@@ -39,19 +39,21 @@ body{
   }
   @media (min-height:900px) {
     .maintitle {
-      margin-top: 6%;
-      line-height: 900px;
+      margin-top: 5%;
       background-image:url("../img/main.jpg");
       background-size:25%;
-      height:100%;
-      background-attachment: fixed;
-      background-position: center;
-      display: flex;
-      justify-content: space-between;
-      font-size: 30px;
+      font-size: 50px;
+      line-height: 100px;
     }
+    .box1{
+      margin-left: 10%;
+      margin-right: 10%;
+    }
+  .yohaku{
+    line-height: 500px;
+    text-align: center;
   }
-
+  }
   .footer {
     padding: 2rem;
     font-size: 15px;

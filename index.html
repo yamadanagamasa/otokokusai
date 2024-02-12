@@ -11,10 +11,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css?family=Sawarabi+Mincho" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
     <script>
       function showRestTime() {
         const now = new Date();
-        const goal = new Date(2024, 4, 29);
+        const goal = new Date(2024, 3, 30);
 
         const restMillisecond = goal.getTime() - now.getTime();
         const day = Math.floor(restMillisecond / 1000 / 60 / 60 / 24);
@@ -41,11 +43,12 @@
     <div class="side">
       <!-- <p class="yoko1">OTOKOKUSAI</p> -->
     </div>
+    <div class="yohaku">▫️</div>
     <div class="box1 hannari">
-    <a href="game.html">
-      <!-- <div class="sai"></div> -->
+      <a href="game.html">
       <p class="a-keshi">さいは投げられた</p></a>
-  </div>
+    </div>
+    <div class="yohaku">▫️</div>
     <div class="side">
   </div>
   </div>
@@ -60,7 +63,7 @@
     <br><br><br><br><br><br> -->
   <div class="margin-side">
     <div class="hannari  box17">
-          <p>4月29日まで、</p>
+          <p>文化祭まで、</p>
       <p class="timer">残り
         <span id="day"></span>日と
         <span id="hour"></span>時間

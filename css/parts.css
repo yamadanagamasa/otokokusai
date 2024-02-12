@@ -47,16 +47,19 @@ margin-right: 10%;
 }
 .box17{
   font-size: 40px;
+  transform: rotate( -4deg );
 }
 }
 @media (min-height:900px) {
 .box17{
   font-size: 50px;
-  /* transform: rotate( 90deg ); */
+  transform: rotate( -4deg );
 }
-.box17 p{
-  /* transform: rotate( 90deg ); */
-}
+
+.margin-side{
+  margin-left: 5%;
+  margin-right: 5%;
+  }
 }
 
 .yoko1{
