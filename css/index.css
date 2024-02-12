@@ -44,6 +44,9 @@ body{
   }
   }
   @media (min-height:900px) {
+    body{
+      font-size: 50px;
+    }
     .header-inner img{
       width: 10%;
     }
