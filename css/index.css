@@ -2,9 +2,13 @@ html {
   background-color: rgb(255, 255, 255);
   font-family: 'Oswald', sans-serif;
 }
+@font-face {
+  font-family: 'fontpo';
+  src: url('../img/FOT-NANSTD-L.otf') format('opentype');
+}
 body{
   margin: 0%;
-  font-family: "Sawarabi Mincho"; 
+  font-family: "fontpo"; 
 }
 .header {
     box-sizing: border-box;
