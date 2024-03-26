@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/sai.css">
     <link rel="stylesheet" href="css/parts.css">
+    <link type="text/css" rel="stylesheet" media="screen" href="css/jquery-sakura.min.css" />
     <link rel="icon" type="image/png" href="img/logo.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -33,63 +34,314 @@
     </script>
 </head>
 <body>
-  <header class="header">
-    <div class="header-inner">
-        <img src="img/logo.png" width="5%">
+  <div id="splash">
+    <div id="splash_logo">
+      <img src="img/logo.png" alt="" class="fadeUp">
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="centerside">
+      <header class="header">
+        <div class="header-inner">
+          <!-- <img class="logo"src="img/logo.png" width="5%"> -->
+        </div>
+      </header>
+      <div class="maintitle">
+        <div class="side">
+        </div>
+        <div class="yohaku"><br></div>
+        <div class="box1 hannari">
+          <!-- <a href="game.html"> -->
+          <p  class="a-keshi saihanagerareta" id="maintitle">さいは投げられた</p>
+        <!-- </a> -->
+        </div>
+        <div class="yohaku"><br></div>
+        <div class="side">
+      </div>
+      </div>
+      <div class=" nakami">
+        <div class="margin-side">
+          <!-- 日定 -->
+          <!-- <div class="hannari  box17">
+                <p>4月29日(月・祝) 9:00-15:00</p>
+            <p class="timer">文化祭まで
+              <span id="day"></span>日
+            </p>
+          </div> -->
+          <br>
+          <div class="message">
+          <h1 class="subtitle">久留米大学附設高校　第54回文化祭</h1>
+          <h3>    
+            「さいは投げられた」</h3>
+          <p>日本屈指の進学校に、非日常空間が出現す
+            る。
+            <p>
+              公開授業、古本バザー、ピタゴラスイッチ。
+          </p>
+          <p>
+            炭火焼きの屋台、体育館ステージでの華麗なパフォーマンス。    </p>
+          <p>
+              校舎の窓はステンドグラスに。    </p>
+          <p>
+            遊べる文化祭、出会いの文化祭、笑いと涙の文化祭。    </p>
+          <p >
+            附設生たちの挑戦が、いま、始まる。    </p>
+      
+    </div>
+          <br>
+          <h1 class="subtitle fadein2 ">マップ</h1>
+          <!-- 体育館 -->
+          <div class="area fadein2">
+            <h1>体育館</h1>
+            <div class="map1">
+              <div class="map_item">
+                <a  class="ugoku1">・フセツスイッチ</a><br>
+                <a class="ugoku1">・謎解きラリー</a><br>
+                <a class="ugoku1">・アミューズメントパーク</a><br>
+                <a class="ugoku1">・人生ゲーム</a><br>
+              </div>
+              <div class="map_item">
+                <a  class="ugoku1">・フセツスイッチ</a><br>
+                <a class="ugoku1">・謎解きラリー</a><br>
+                <a class="ugoku1">・アミューズメントパーク</a><br>
+                <a class="ugoku1">・人生ゲーム</a><br>
+                <br>
+              </div>
+            </div>
+          </div>
+
+          <!-- 東棟 -->
+          <div class="area fadein2">
+            <h1>東棟</h1>
+            <!-- 一階 -->
+            <div class="map1">
+              <div class="map_item">
+                <img src="img/schoolhigasi.jpg" width="60%" >
+              </div>
+              <div class="map_item">
+                <h2>1F</h2>
+                <a href="mise/kururitei.html" class="ugoku1 blue">・久瑠璃亭	</a><br>
+                <a href="mise/frenchpamyupamyu.html" class="ugoku1 blue">・French Pamyupamyu</a><br>
+                <br>
+              </div>
+            </div><br>
+            <!-- 二階 -->
+            <div class="map1">
+              <div class="map_item">
+                <img src="img/schoolhigasi.jpg" width="60%" >
+              </div>
+              <div class="map_item">
+                <h2>2F</h2>
+                ・図書室
+                <br>
+              </div>
+            </div><br>
+            <!-- 三階 -->
+            <div class="map1">
+              <div class="map_item">
+                <img src="img/schoolhigasi.jpg" width="60%" >
+              </div>
+              <div class="map_item">
+                <h2>3F</h2>
+                <a href="kikaku/tetsudoudoukoukai.html" class="ugoku1 blue">・鉄道同好会</a><br>
+                <a href="kikaku/bunngei.html" class="ugoku1 blue">・文芸同好会</a><br>
+                <a href="kikaku/quiz.html" class="ugoku1 blue">・クイズ部</a><br>
+                <a href="kikaku/hyakuninnissyu.html" class="ugoku1 blue">・百人一首部</a><br>
+                <br>
+              </div>
+            </div><br>
+            <!-- 四階 -->
+            <div class="map1">
+              <div class="map_item">
+                <img src="img/schoolhigasi.jpg" width="60%" >
+              </div>
+              <div class="map_item">
+                <h2>4F</h2>
+                <a href="kikaku/fusetsuswitch.html" class="ugoku1 blue">・理科企画</a><br>
+                <a href="kikaku/fusetsumoshimoshi.html" class="ugoku1 blue">・附設もしもし</a><br>
+                <a href="kikaku/touronnkai.html" class="ugoku1 blue">・討論会</a><br>
+                <a href="kikaku/suugaku.html" class="ugoku1 blue">・数学企画</a><br>
+                <a href="kikaku/kokugosyakai.html" class="ugoku1 blue">・国語・社会企画</a><br>
+                <a href="kikaku/koukaijugyou.html" class="ugoku1 blue">・公開授業</a><br>
+                <br>
+              </div>
+            </div><br>
+            <!-- 五階 -->
+            <div class="map1">
+              <div class="map_item">
+                <img src="img/schoolhigasi.jpg" width="60%" >
+              </div>
+              <div class="map_item">
+                <h2>5F</h2>
+                <a href="kikaku/youkaientarupi.html" class="ugoku1">・妖怪エンタルピー</a><br>
+                <a href="mise/masitta.html" class="ugoku1">・맛있다(マシッタ)</a><br>
+                <a href="kikaku/youkaientarupi.html" class="ugoku1">・高一Aバザー</a><br>
+                <a href="kikaku/onngakusitsu.html" class="ugoku1">・東棟音楽室企画</a><br>
+                <br>
+              </div>
+            </div>
+          </div>
+
+          <!-- 西棟 -->
+          <div class="area fadein2">
+            <h1>西棟</h1>
+            <!-- 三階 -->
+            <div class="map1">
+              <div class="map_item">
+                <img src="img/school3.webp" width="100%" >
+              </div>
+              <div class="map_item">
+                <h2>3F</h2>
+                <a href="kikaku/fusetsuswitch.html" class="ugoku1 blue">・フセツスイッチ</a><br>
+                <a href="kikaku/nazotokirari.html" class="ugoku1">・謎解きラリー</a><br>
+                <a href="kikaku/amyuzumennto.html" class="ugoku1">・アミューズメントパーク</a><br>
+                <a href="kikaku/jinnseigame.html" class="ugoku1 blue">・人生ゲーム</a><br>
+                <br>
+              </div>
+            </div>
+            <!-- 四階 -->
+            <div class="map1">
+              <div class="map_item">
+                <img src="img/school3.webp" width="100%" >
+              </div>
+              <div class="map_item">
+                <h2>4F</h2>
+                <a href="mise/mickeyDs.html" class="ugoku1">・Mickey D's Burger</a><br>
+                <a href="mise/mickeyDs.html" class="ugoku1">・FuseTube</a><br>
+                <a href="mise/mickeyDs.html" class="ugoku1">・附設印良品</a><br>
+                <br>
+              </div>
+            </div>
+            <!-- 五階 -->
+            <div class="map1">
+              <div class="map_item">
+                <img src="img/school3.webp" width="100%" >
+              </div>
+              <div class="map_item">
+                <h2>5F</h2>
+                <a  class="ugoku1">・FuseTube</a><br>
+                <a class="ugoku1">・No sugar,No Life 2</a><br>
+                <a class="ugoku1">・紬気</a><br>
+                <br>
+              </div>
+            </div>
+          </div>
+          
+          <!-- 中央ステージ -->
+          <div class="area fadein2">
+            <h1>中央ステージ</h1>
+            <div class="map1">
+              <div class="map_item">
+                <a  class="ugoku1">・フセツスイッチ</a><br>
+                <a class="ugoku1">・謎解きラリー</a><br>
+                <a class="ugoku1">・アミューズメントパーク</a><br>
+                <a class="ugoku1">・人生ゲーム</a><br>
+              </div>
+              <div class="map_item">
+                <a  class="ugoku1">・フセツスイッチ</a><br>
+                <a class="ugoku1">・謎解きラリー</a><br>
+                <a class="ugoku1">・アミューズメントパーク</a><br>
+                <a class="ugoku1">・人生ゲーム</a><br>
+                <br>
+              </div>
+            </div>
+          </div>
+
+          <!-- 一号館 -->
+          <div class="area fadein2">
+            <h1>一号館</h1>
+            <!-- 一階 -->
+            <div class="map1">
+              <div class="map_item">
+                <img src="img/ichigoukan.png" width="100%" >
+              </div>
+              <div class="map_item">
+                <h2>1F</h2>
+                <a href="kikaku/fusetsuswitch.html" class="ugoku1 blue">・フセツスイッチ</a><br>
+                <a class="ugoku1">・謎解きラリー</a><br>
+                <a class="ugoku1">・アミューズメントパーク</a><br>
+                <a href="kikaku/jinnseigame.html" class="ugoku1 blue">・人生ゲーム</a><br>
+                <br>
+              </div>
+            </div><br>
+            <!-- 二階 -->
+            <div class="map1">
+              <div class="map_item">
+                <img src="img/ichigoukan.png" width="100%" >
+              </div>
+              <div class="map_item">
+                <h2>2F</h2>
+                <a class="ugoku1">・古書バザー</a><br>
+                <a class="ugoku1">・卒論展示</a><br>
+                <a class="ugoku1">・学校関係者展</a><br>
+                <br>
+              </div>
+            </div><br>
+            <!-- 三階 -->
+            <div class="map1">
+            <div class="map_item">
+              <img src="img/ichigoukan.png" width="100%" >
+            </div>
+            <div class="map_item">
+              <h2>3F</h2>
+              <a  class="ugoku1">・参加型アート</a><br>
+              <a class="ugoku1">・プラネタリウム</a><br>
+              <a class="ugoku1">・サイコロハウス</a><br>
+              <br>
+            </div>
+            </div><br>
+          </div>
+
+          <!-- 屋外 -->
+          <div class="area fadein2">
+            <h1>屋外</h1>
+            <div class="map1">
+              <div class="map_item">
+                <img src="img/okugai.png" width="70%" >
+              </div>
+              <div class="map_item">
+                <a href="kikaku/fusetsuswitch.html" class="ugoku1 blue">・フセツスイッチ</a><br>
+                <a class="ugoku1">・謎解きラリー</a><br>
+                <a class="ugoku1">・アミューズメントパーク</a><br>
+                <a href="kikaku/jinnseigame.html" class="ugoku1 blue">・人生ゲーム</a><br>
+                <br>
+              </div>
+            </div>
+          </div>
+        <div class="fadein2">
+          <h1 class="subtitle">アクセス</h1>
+          <p>〒839-0862 福岡県久留米市野中町２０−２</p>
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3334.5514298839676!2d130.54047887570175!3d33.304396456848195!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3541a431d230bc7d%3A0x9c46b40d67c42469!2z5LmF55WZ57Gz5aSn5a2m6ZmE6Kit5Lit5a2m5qCh44O76auY562J5a2m5qCh!5e0!3m2!1sja!2sjp!4v1710171429470!5m2!1sja!2sjp" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div><br><br><br><br>
+        </div>
+      </div>
+    </div>
+    <div class="rightside">
+      <div class="right_content">
         
+        <img class="ugoku2 toTop" src="img/logo.png" width="5%"><br><br><br>
+        <p class="ugoku1">マップ</p>
+        <p class="ugoku1">バザー</p>
+        <p class="ugoku1">グッズ</p>
+        <p class="ugoku1">アクセス</p>
+      </div>
     </div>
-  </header>
-  <div class="maintitle">
-    <div class="side">
-      <!-- <p class="yoko1">OTOKOKUSAI</p> -->
+    <div class="leftside">
+      <div class="left_content">
+        <p >久留米附設</p>
+        <p >54th文化祭</p>
+      </div>
     </div>
-    <div class="yohaku"><br></div>
-    <div class="box1 hannari">
-      <a href="game.html">
-      <p class="a-keshi">さいは投げられた</p></a>
-    </div>
-    <div class="yohaku"><br></div>
-    <div class="side">
   </div>
-  </div>
-  <div class="nakami">
-  <div class="margin-side">
-    <div class="hannari  box17">
-          <p>4月29日(月・祝) 9:00-15:00</p>
-      <p class="timer">文化祭まで
-        <span id="day"></span>日
-      </p>
-    </div>
-    <br>
-    <h1 class="subtitle">久留米大学附設高校　第54回文化祭</h1>
-    <h2>「さいは投げられた」</h2><div class="minisai"></div>
-    <p>日本屈指の進学校に、非日常空間が出現す
-      る。
-      <p>
-        公開授業、古本バザー、ピタゴラスイッチ。
-    </p>
-    <p>
-      炭火焼きの屋台、体育館ステージでの華麗なパフォーマンス。    </p>
-    <p>
-        校舎の窓はステンドグラスに。    </p>
-    <p>
-      遊べる文化祭、出会いの文化祭、笑いと涙の文化祭。    </p>
-    <p>
-      附設生たちの挑戦が、いま、始まる。    </p>
-<p>      ーーさいは投げられた。</p>
-    <br><br>
-    <h1 class="subtitle">アクセス</h1>
-   <p>〒839-0862 福岡県久留米市野中町２０−２</p>
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3334.5514298839676!2d130.54047887570175!3d33.304396456848195!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3541a431d230bc7d%3A0x9c46b40d67c42469!2z5LmF55WZ57Gz5aSn5a2m6ZmE6Kit5Lit5a2m5qCh44O76auY562J5a2m5qCh!5e0!3m2!1sja!2sjp!4v1710171429470!5m2!1sja!2sjp" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-    <br><br><br><br>
-  </div>
-  
-</div>
   <footer class="footer">
     <p class="copyright">&copy;Otokokusai</p>
     <ul class="md-flex">
       <li></li>
     </ul>
   </footer>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <script src="js/jquery-sakura.min.js"></script>
+  <script src="js/loading.js"></script>
 </body>
 </html>
