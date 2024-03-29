@@ -17,4 +17,23 @@
 }
 .kikaku-font1{
     background-color: rgb(255, 255, 255);
+    width: fit-content;
+    border-radius: 2px;
+}
+.fusetube{
+    background-color: rgb(202, 136, 136);
+}
+.nosugar{
+    background-color: rgb(199, 203, 241);
+}
+.nosugar-font{
+    width: fit-content;
+    border-radius: 2px;
+    background-color: rgb(225, 226, 238);
+}
+.yuzuki{
+    background-color: #e6cde3;
+}
+.kosyo{
+    background-color: #d8e698;
 }

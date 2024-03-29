@@ -64,10 +64,13 @@ margin-right: 10%;
   }
 }
 .a-keshi:hover {
-  transform: rotate( -4deg );
+  transform: rotate( -7deg );
 }
 a {
   text-decoration:none; 
+}
+.ugoku1{
+  font-size: 20px;
 }
 .ugoku1:hover{
   font-size: larger;
@@ -150,4 +153,15 @@ transform: translateY(0);
 .fadein2.active{
   opacity : 1;
   transform : translate(0, 0);
+}
+
+.map1{
+  margin-left: 1%;
+  margin-right: 1%;
+  background-color:#e8ecef;
+  border-radius: 5px;
+  padding: 1%;
+}
+.map1 a{
+  margin-left: 1%;
 }

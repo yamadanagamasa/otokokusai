@@ -1,7 +1,7 @@
 /* 基本 */
 html {
   background-color: rgb(255, 255, 255);
-  font-family: 'Oswald', sans-serif;
+  scroll-behavior: smooth;
 }
 @font-face {
   font-family: 'fontpo';
@@ -15,7 +15,7 @@ body{
   margin: 0%;
   font-family: "fontpo"; 
 }
-img{
+.img-white{
   background-color: white;
   border-radius: 4px;
 }
@@ -141,7 +141,6 @@ img{
     }
   }
 /* フッター */
-
   /* サイドバー */
 .wrap {
   display: grid;
@@ -177,3 +176,21 @@ height: 100%;
   top: 50px;
 }
 /* サイドバー */
+
+/* もーだる */
+  .alert {
+    z-index: 4;
+    font-size: 30px;
+    position: fixed;
+    margin-top: 20%;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+    margin-left: 30%;
+    margin-right: 25%;
+}
+.annkoku{
+  background-color: rgb(35, 35, 35);
+  color: white;
+  border-radius: 0.5rem;
+}
+/* もーだる */
