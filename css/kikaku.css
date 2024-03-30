@@ -1,16 +1,25 @@
+@media (max-height: 900px) {
 .kikaku-margin{
     margin-left: 20%;
     margin-right: 20%;
-}
-
+}}
+@media (min-height: 900px) {
+.kikaku-margin{
+    margin-left: 5%;
+    margin-right: 5%;
+    font-size: 40px;
+}}
+/* 
 .mickiy{
     background-color: rgb(255, 115, 115);
+    height: 100%;
 }
 .mickiy-font{
     background-color: rgb(255, 255, 146);
 }
 .kururi{
     background-color: rgb(177, 173, 249);
+    height: 100%;
 }
 .bunngei{
     background-color: rgb(186, 186, 186); 
@@ -18,7 +27,7 @@
 .kikaku-font1{
     background-color: rgb(255, 255, 255);
     width: fit-content;
-    border-radius: 2px;
+    border-radius: 4px;
 }
 .fusetube{
     background-color: rgb(202, 136, 136);
@@ -36,4 +45,4 @@
 }
 .kosyo{
     background-color: #d8e698;
-}
+} */

@@ -12,6 +12,25 @@ $(window).on('load',function(){
       return false;
     });
   });
+  
+  $(function(){
+    $('.toMap').click(function () {
+      $('body,html').animate({
+        scrollTop:$('#Map').offset().top
+      }, 100);
+      return false;
+    });
+  });
+  
+
+  $(function(){
+    $('.toAccess').click(function () {
+      $('body,html').animate({
+        scrollTop:$('#Access').offset().top
+      }, 100);
+      return false;
+    });
+  });
 
 
   $(function(){
