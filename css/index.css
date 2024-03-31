@@ -46,12 +46,16 @@ body{
   left: 0;
   gap: 10px;
   font-weight: bold;
-  z-index:1
-  radious
+  z-index:1;
+  border-radius: 5%;
 }
 .header-inner {
   text-align: center;
-}}
+}
+.header-inner img{
+  width: 15%;
+}
+}
 
 /* ヘッダー */
 /*メイン  */

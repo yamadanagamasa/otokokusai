@@ -83,14 +83,21 @@
   gap:5%;
   background-color:#e8ecef;
   border-radius: 5px;
+  padding: 1%;
 }
 .yokonarabi img{
-  width: 30%;
+  max-width: 40%;
+  object-fit: cover;
+  min-width: 30%;
   background-color:#e8ecef;
   border-radius: 5px;
 }
 }
 @media (min-height: 900px){
+  .yokonarabi img{
+    max-width: 80vw;
+    min-width: 60vw;
+  }
 }
 
 /* ロード画面 *//* ロード画面 */
