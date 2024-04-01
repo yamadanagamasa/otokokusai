@@ -47,6 +47,13 @@ $(window).on('load',function(){
 });
 
 $('.saihanagerareta').click(function(){
+  const ua = navigator.userAgent;
+  if (ua.indexOf('iPhone') > -1 || (ua.indexOf('Android') > -1 && ua.indexOf('Mobile') > -1)) {
+    window.location.href = "game.html";
+  } else if (ua.indexOf('iPad') > -1 || ua.indexOf('Android') > -1) {
+    window.location.href = "game2.html";
+  } else {
+      
   let colorlist = ["white", "#e8d3c7",  "#f8b862",  "#333631","#84b9cb",  "#c3d825"];
   // let colorlist = ["white","#333631"];
   let randomIndex = Math.floor(Math.random() * 6);
@@ -84,8 +91,8 @@ $('.saihanagerareta').click(function(){
       $("body").snowfall('clear');
       $("body").snowfall({
         　flakeCount: 100, //降らせる数
-        　minSize : 30, // 最小サイズ（数値）
-        　maxSize : 40, // 最大サイズ（数値）
+        　minSize : 50, // 最小サイズ（数値）
+        　maxSize : 90, // 最大サイズ（数値）
         　minSpeed : 6, // 最低速度（数値）
         　maxSpeed : 16, //最大速度
         　image : "js/kadai.png", //ここで画像を指定
@@ -99,8 +106,8 @@ $('.saihanagerareta').click(function(){
         $("body").snowfall('clear');
       $("body").snowfall({
         　flakeCount: 100, //降らせる数
-        　minSize : 30, // 最小サイズ（数値）
-        　maxSize : 40, // 最大サイズ（数値）
+        　minSize : 40, // 最小サイズ（数値）
+        　maxSize : 80, // 最大サイズ（数値）
         　minSpeed : 6, // 最低速度（数値）
         　maxSpeed : 16, //最大速度
         　image : "js/tanni.png", //ここで画像を指定
@@ -133,6 +140,8 @@ $('.saihanagerareta').click(function(){
 
   }
 }
-  });
+}
+
+});
 
   

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vertical Shooting Game</title>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #272727;
+        color: #fff;
+        font-family: Arial, sans-serif;
+    }
+
+    #gameContainer {
+        border: 2px solid #fff;
+        border-radius: 10px;
+        background-color: #444;
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    }
+
+    canvas {
+        display: block;
+        margin: 0 auto;
+        border-radius: 10px;
+    }
+</style>
+</head>
+<body>
+<div id="gameContainer">
+    <canvas id="gameCanvas" width="400" height="600"></canvas>
+</div>
+<script>
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+
+    let level = 1;
+    let playerSpeed = 5;
+    let enemySpeed = 2;
+
+    const player = {
+        x: canvas.width / 2,
+        y: canvas.height - 50,
+        width: 30,
+        height: 30,
+        color: '#ffcc00'
+    };
+
+    let bullets = [];
+    let enemies = [];
+
+    function drawPlayer() {
+        ctx.fillStyle = player.color;
+        ctx.fillRect(player.x - player.width / 2, player.y - player.height / 2, player.width, player.height);
+    }
+
+    function drawBullets() {
+        ctx.fillStyle = '#ff0000';
+        bullets.forEach(bullet => {
+            ctx.fillRect(bullet.x - 2.5, bullet.y - 2.5, 5, 5);
+        });
+    }
+
+    function drawEnemies() {
+        ctx.fillStyle = '#00ffcc';
+        enemies.forEach(enemy => {
+            ctx.fillRect(enemy.x - 10, enemy.y - 10, 20, 20);
+        });
+    }
+
+    function update() {
+        if (keys.ArrowLeft && player.x > 0) {
+            player.x -= playerSpeed;
+        }
+        if (keys.ArrowRight && player.x < canvas.width) {
+            player.x += playerSpeed;
+        }
+
+        bullets.forEach(bullet => {
+            bullet.y -= 5;
+        });
+
+        enemies.forEach(enemy => {
+            enemy.y += enemySpeed;
+        });
+
+        if (enemies.length === 0 || Math.random() < 0.01) {
+            enemies.push({ x: Math.random() * canvas.width, y: -20 });
+        }
+
+        bullets = bullets.filter(bullet => bullet.y > 0);
+
+        enemies = enemies.filter(enemy => enemy.y < canvas.height);
+
+        enemies.forEach(enemy => {
+            bullets.forEach(bullet => {
+                if (bullet.x > enemy.x - 10 &&
+                    bullet.x < enemy.x + 10 &&
+                    bullet.y > enemy.y - 10 &&
+                    bullet.y < enemy.y + 10) {
+                    enemies.splice(enemies.indexOf(enemy), 1);
+                    bullets.splice(bullets.indexOf(bullet), 1);
+                }
+            });
+
+            if (player.x < enemy.x + 20 &&
+                player.x + player.width > enemy.x &&
+                player.y < enemy.y + 20 &&
+                player.y + player.height > enemy.y) {
+                alert('Game Over!');
+                document.location.reload();
+            }
+        });
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        drawPlayer();
+        drawBullets();
+        drawEnemies();
+        requestAnimationFrame(update);
+    }
+
+    const keys = {};
+    window.addEventListener('keydown', e => {
+        keys[e.key] = true;
+    });
+    window.addEventListener('keyup', e => {
+        keys[e.key] = false;
+    });
+
+    canvas.addEventListener('click', e => {
+        bullets.push({ x: player.x, y: player.y - player.height / 2 });
+    });
+
+    canvas.addEventListener('mousemove', e => {
+        const rect = canvas.getBoundingClientRect();
+        player.x = e.clientX - rect.left;
+    });
+
+    function levelUp() {
+        level++;
+        playerSpeed += 1;
+        enemySpeed += 0.5;
+        setTimeout(levelUp, 10000); // レベルアップまでの時間（ミリ秒）
+    }
+
+    levelUp();
+    update();
+</script>
+</body>
+</html>

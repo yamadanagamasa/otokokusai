@@ -3,19 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Button Tetris</title>
+  <title>ゲーム</title>
   <style>
+    @font-face {
+  font-family: 'fontpo';
+  src: url('img/FOT-NANSTD-L.otf') format('opentype');
+}
     body {
       display: flex;
       align-items: center;
       justify-content: center;
       flex-direction: column;
-      height: 100vh;
+      height: 80vh;
       margin: 0;
-      background-color: #f0f0f0;
+      background-color: #e8ecef;
+      font-family: "fontpo"; 
     }
-
+.game{
+  position: fixed;
+}
     canvas {
+      height: 80vh;
       border: 1px solid #ccc;
       margin-bottom: 10px;
     }
@@ -25,11 +33,26 @@
       justify-content: space-around;
       width: 100%;
     }
-
+    .red{
+      background-color:#DA3C27;
+      color: #ffffff;
+    }
+    .yellow{
+      background-color:#EDD457;
+      font-weight: bold;
+      color: #ffffff;
+    }
+    .blue{
+      background-color:#1E3E6F;
+      font-weight: bold;
+      color: #ffffff;
+    }
     button {
+      font-family: "fontpo"; 
       padding: 10px;
       font-size: 16px;
       cursor: pointer;
+      border-radius: 20%;
     }
     @media screen and (min-width:1024px) {
     .btm{
@@ -40,17 +63,17 @@
   </style>
 </head>
 <body>
-
+<div class="game">
 <canvas id="tetrisCanvas" width="300" height="600"></canvas>
 <div class="btm">
 <div id="controls">
-  <button onclick="moveLeft()">Left</button>
-  <button onclick="moveRight()">Right</button>
-  <button onclick="rotate()">Rotate</button>
-  <button onclick="moveDown()">Down</button>
+  <button class="red" onclick="moveLeft()">Left</button>
+  <button class="blue" onclick="moveRight()">Right</button>
+  <button class="yellow" onclick="rotate()">Rotate</button>
+  <button class="red" onclick="moveDown()">Down</button>
 </div></div>
 <div id="level">Level: 1</div>
-
+</div>
 <script>
   const canvas = document.getElementById('tetrisCanvas');
   const context = canvas.getContext('2d');
@@ -59,7 +82,7 @@
   const ROWS = 20;
   const COLUMNS = 10;
   const BLOCK_SIZE = 30;
-  const COLORS = ['#EDD457', '#DA3C27', '#1E3E6F', '#E9EDEF', '#1E3E6F', '#DA3C27', '#EDD457'];
+  const COLORS = ['#EDD457', '#DA3C27', '#1E3E6F', '#E9EDEF', '#1E3E6F', '#DA3C27', '#EDD457', '#E9EDEF'];
 
   let board = Array.from({ length: ROWS }, () => Array(COLUMNS).fill(0));
   let currentPiece;
@@ -208,6 +231,7 @@
       [[1, 1, 1], [0, 0, 1]],
       [[1, 1, 0], [0, 1, 1]],
       [[0, 1, 1], [1, 1, 0]],
+      [[1, 0], [1, 1]],
     ];
     return shapes[Math.floor(Math.random() * shapes.length)];
   }

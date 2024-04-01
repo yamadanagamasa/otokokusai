@@ -9,10 +9,10 @@
     margin-right: 5%;
     font-size: 40px;
 }}
-
+@media (max-height:900px){
 .mickiy{
     background-color: rgb(255, 115, 115);
-    height: 100vh;
+    height:100vh;
 }
 .mickiy-font{
     background-color: rgb(255, 255, 146);
@@ -20,11 +20,12 @@
 }
 .kururi{
     background-color: rgb(177, 173, 249);
-    height: 100vh;
+    height:100vh;
 }
 .bunngei{
+    top:0;
     background-color: rgb(186, 186, 186); 
-    height: 100vh;
+    height:100vh;
 }
 .kikaku-font1{
     background-color: rgb(255, 255, 255);
@@ -33,23 +34,22 @@
 }
 .fusetube{
     background-color: rgb(202, 136, 136);
-    height: 100vh;
 }
 .nosugar{
     background-color: rgb(199, 203, 241);
-    height: 100vh;
+    height:100vh;
 }
 .nosugar-font{
+
     width: fit-content;
     border-radius: 2px;
     background-color: rgb(225, 226, 238);
 }
+
 .yuzuki{
     background-color: #e6cde3;
-    height: 100vh;
 
 }
 .kosyo{
     background-color: #d8e698;
-    height: 100vh;
-}
+}}
