@@ -1,155 +1,135 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Vertical Shooting Game</title>
-<style>
-    body {
-        margin: 0;
-        padding: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        background-color: #272727;
-        color: #fff;
-        font-family: Arial, sans-serif;
-    }
-
-    #gameContainer {
-        border: 2px solid #fff;
-        border-radius: 10px;
-        background-color: #444;
-        box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-    }
-
-    canvas {
-        display: block;
-        margin: 0 auto;
-        border-radius: 10px;
-    }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>縦シューティングゲーム</title>
+    <style>
+        canvas {
+            border: 1px solid black;
+            display: block;
+            margin: 0 auto;
+            background-color: #000;
+        }
+    </style>
 </head>
 <body>
-<div id="gameContainer">
     <canvas id="gameCanvas" width="400" height="600"></canvas>
-</div>
-<script>
-    const canvas = document.getElementById('gameCanvas');
-    const ctx = canvas.getContext('2d');
+    <script>
+        const canvas = document.getElementById("gameCanvas");
+        const ctx = canvas.getContext("2d");
 
-    let level = 1;
-    let playerSpeed = 5;
-    let enemySpeed = 2;
+        const player = {
+            x: canvas.width / 2,
+            y: canvas.height - 50,
+            width: 50,
+            height: 50,
+            speed: 6,
+            lastBulletTime: 0
+        };
 
-    const player = {
-        x: canvas.width / 2,
-        y: canvas.height - 50,
-        width: 30,
-        height: 30,
-        color: '#ffcc00'
-    };
+        let bullets = [];
+        let enemies = [];
 
-    let bullets = [];
-    let enemies = [];
-
-    function drawPlayer() {
-        ctx.fillStyle = player.color;
-        ctx.fillRect(player.x - player.width / 2, player.y - player.height / 2, player.width, player.height);
-    }
-
-    function drawBullets() {
-        ctx.fillStyle = '#ff0000';
-        bullets.forEach(bullet => {
-            ctx.fillRect(bullet.x - 2.5, bullet.y - 2.5, 5, 5);
-        });
-    }
-
-    function drawEnemies() {
-        ctx.fillStyle = '#00ffcc';
-        enemies.forEach(enemy => {
-            ctx.fillRect(enemy.x - 10, enemy.y - 10, 20, 20);
-        });
-    }
-
-    function update() {
-        if (keys.ArrowLeft && player.x > 0) {
-            player.x -= playerSpeed;
-        }
-        if (keys.ArrowRight && player.x < canvas.width) {
-            player.x += playerSpeed;
+        function spawnEnemy() {
+            const enemy = {
+                x: Math.random() * canvas.width,
+                y: 0,
+                width: 30,
+                height: 30,
+                speed: Math.random() * 4 + 2,
+                lastBulletTime: 0
+            };
+            enemies.push(enemy);
         }
 
-        bullets.forEach(bullet => {
-            bullet.y -= 5;
-        });
+        function gameLoop() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-        enemies.forEach(enemy => {
-            enemy.y += enemySpeed;
-        });
+            ctx.fillStyle = "#00ff00"; // プレイヤーの色を緑に変更
+            ctx.fillRect(player.x, player.y, player.width, player.height);
 
-        if (enemies.length === 0 || Math.random() < 0.01) {
-            enemies.push({ x: Math.random() * canvas.width, y: -20 });
-        }
-
-        bullets = bullets.filter(bullet => bullet.y > 0);
-
-        enemies = enemies.filter(enemy => enemy.y < canvas.height);
-
-        enemies.forEach(enemy => {
+            ctx.fillStyle = "#ff0000"; // 弾の色を赤に変更
             bullets.forEach(bullet => {
-                if (bullet.x > enemy.x - 10 &&
-                    bullet.x < enemy.x + 10 &&
-                    bullet.y > enemy.y - 10 &&
-                    bullet.y < enemy.y + 10) {
-                    enemies.splice(enemies.indexOf(enemy), 1);
-                    bullets.splice(bullets.indexOf(bullet), 1);
+                ctx.fillRect(bullet.x, bullet.y, 5, 15);
+            });
+
+            ctx.fillStyle = "#ffff00"; // 敵の色を黄色に変更
+            enemies.forEach(enemy => {
+                ctx.fillRect(enemy.x, enemy.y, enemy.width, enemy.height);
+            });
+
+            bullets.forEach(bullet => {
+                bullet.y -= 10;
+            });
+
+            enemies.forEach(enemy => {
+                enemy.y += enemy.speed;
+            });
+
+            bullets.forEach((bullet, bulletIndex) => {
+                enemies.forEach((enemy, enemyIndex) => {
+                    if (
+                        bullet.x < enemy.x + enemy.width &&
+                        bullet.x + 5 > enemy.x &&
+                        bullet.y < enemy.y + enemy.height &&
+                        bullet.y + 15 > enemy.y
+                    ) {
+                        bullets.splice(bulletIndex, 1);
+                        enemies.splice(enemyIndex, 1);
+                    }
+                });
+            });
+
+            enemies.forEach((enemy, enemyIndex) => {
+                if (
+                    player.x < enemy.x + enemy.width &&
+                    player.x + player.width > enemy.x &&
+                    player.y < enemy.y + enemy.height &&
+                    player.y + player.height > enemy.y
+                ) {
+                    alert("ゲームオーバー");
+                    document.location.reload();
                 }
             });
 
-            if (player.x < enemy.x + 20 &&
-                player.x + player.width > enemy.x &&
-                player.y < enemy.y + 20 &&
-                player.y + player.height > enemy.y) {
-                alert('Game Over!');
-                document.location.reload();
+            if (Math.random() < 0.03) {
+                spawnEnemy();
             }
+
+            // 弾を定期的に発射
+            const currentTime = Date.now();
+            if (currentTime - player.lastBulletTime > 500) {
+                const bullet = {
+                    x: player.x + player.width / 2 - 2.5,
+                    y: player.y
+                };
+                bullets.push(bullet);
+                player.lastBulletTime = currentTime;
+            }
+
+            enemies.forEach(enemy => {
+                if (currentTime - enemy.lastBulletTime > Math.random() * 2000 + 1000) {
+                    const bullet = {
+                        x: enemy.x + enemy.width / 2 - 2.5,
+                        y: enemy.y + enemy.height
+                    };
+                    bullets.push(bullet);
+                    enemy.lastBulletTime = currentTime;
+                }
+            });
+
+            requestAnimationFrame(gameLoop);
+        }
+
+        gameLoop();
+
+        // マウスの座標にプレイヤーを移動させる
+        canvas.addEventListener("mousemove", event => {
+            const mouseX = event.clientX - canvas.getBoundingClientRect().left;
+            player.x = mouseX - player.width / 2;
         });
 
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        drawPlayer();
-        drawBullets();
-        drawEnemies();
-        requestAnimationFrame(update);
-    }
-
-    const keys = {};
-    window.addEventListener('keydown', e => {
-        keys[e.key] = true;
-    });
-    window.addEventListener('keyup', e => {
-        keys[e.key] = false;
-    });
-
-    canvas.addEventListener('click', e => {
-        bullets.push({ x: player.x, y: player.y - player.height / 2 });
-    });
-
-    canvas.addEventListener('mousemove', e => {
-        const rect = canvas.getBoundingClientRect();
-        player.x = e.clientX - rect.left;
-    });
-
-    function levelUp() {
-        level++;
-        playerSpeed += 1;
-        enemySpeed += 0.5;
-        setTimeout(levelUp, 10000); // レベルアップまでの時間（ミリ秒）
-    }
-
-    levelUp();
-    update();
-</script>
+    </script>
 </body>
 </html>
