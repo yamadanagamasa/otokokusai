@@ -24,6 +24,15 @@ $(window).on('load',function(){
   
 
   $(function(){
+    $('.toGoods').click(function () {
+      $('body,html').animate({
+        scrollTop:$('#Goods').offset().top
+      }, 100);
+      return false;
+    });
+  });  
+  
+  $(function(){
     $('.toAccess').click(function () {
       $('body,html').animate({
         scrollTop:$('#Access').offset().top
@@ -49,9 +58,9 @@ $(window).on('load',function(){
 $('.saihanagerareta').click(function(){
   const ua = navigator.userAgent;
   if (ua.indexOf('iPhone') > -1 || (ua.indexOf('Android') > -1 && ua.indexOf('Mobile') > -1)) {
-    window.location.href = "game.html";
+    window.location.href = "random.html";
   } else if (ua.indexOf('iPad') > -1 || ua.indexOf('Android') > -1) {
-    window.location.href = "game2.html";
+    window.location.href = "random.html";
   } else {
       
   let colorlist = ["white", "#e8d3c7",  "#f8b862",  "#333631","#84b9cb",  "#c3d825"];
@@ -80,19 +89,19 @@ $('.saihanagerareta').click(function(){
   if(colorlist[randomIndex]=="#84b9cb"){// 青
     $("body").snowfall('clear');
     $("body").snowfall({
-      　flakeCount: 200, //降らせる数
+      　flakeCount: 100, //降らせる数
       　minSize : 50, // 最小サイズ（数値）
-      　maxSize : 100, // 最大サイズ（数値）
+      　maxSize : 60, // 最大サイズ（数値）
       　minSpeed : 30, // 最低速度（数値）
-      　maxSpeed : 76, //最大速度
+      　maxSpeed : 50, //最大速度
       　image : "js/ame.png", //ここで画像を指定
       });
     }else if(colorlist[randomIndex]=="#f8b862"){// オレンジ
       $("body").snowfall('clear');
       $("body").snowfall({
-        　flakeCount: 100, //降らせる数
-        　minSize : 50, // 最小サイズ（数値）
-        　maxSize : 90, // 最大サイズ（数値）
+        　flakeCount: 40, //降らせる数
+        　minSize : 30, // 最小サイズ（数値）
+        　maxSize : 50, // 最大サイズ（数値）
         　minSpeed : 6, // 最低速度（数値）
         　maxSpeed : 16, //最大速度
         　image : "js/kadai.png", //ここで画像を指定
@@ -105,12 +114,12 @@ $('.saihanagerareta').click(function(){
         
         $("body").snowfall('clear');
       $("body").snowfall({
-        　flakeCount: 100, //降らせる数
+        　flakeCount: 40, //降らせる数
         　minSize : 40, // 最小サイズ（数値）
-        　maxSize : 80, // 最大サイズ（数値）
+        　maxSize : 60, // 最大サイズ（数値）
         　minSpeed : 6, // 最低速度（数値）
         　maxSpeed : 16, //最大速度
-        　image : "js/tanni.png", //ここで画像を指定
+        　image : "js/poteto.jpg", //ここで画像を指定
         });
         $(".alert,.tanni").show();
       $(".alert,.tanni").delay(1500).fadeOut('slow');
@@ -129,19 +138,19 @@ $('.saihanagerareta').click(function(){
   }else{ 
   $('.saihanagerareta,p,h1,h2,h3,h4,a').css('color',"black");
   $('p,h1,h2,h3,h4,a').css('background-color',"white")
-                      .css('width'," fit-content")
                       .css('padding',"2px")
+                      .css('width',"fit-content")
                       .css('border-radius',"4px");
+  $('.countdown').css('width',"100%");
   $('html, .box1, .side,.saihanagerareta,.map1').css('background-color',colorlist[randomIndex]).css('color',"white");
   if(colorlist[randomIndex]=="white"){
-    $('p,h1,h2,h3,h4,a').css('background-color',"transparent")
+    $('p,h1,h2,h3,h4,a').css('background-color',"transparent");
     $('.saihanagerareta').css('color',"black");
     $('.map1').css('background-color',"#e8ecef");
 
   }
 }
 }
-
 });
 
-  
+// 変更

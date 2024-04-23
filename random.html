@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>第54回男く祭 - 久留米附設高校文化祭公式サイト</title>
+    <!-- <link href="https://unpkg.com/nes.css/css/nes.css" rel="stylesheet" /> -->
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/sai.css">
+    <link rel="stylesheet" href="css/parts.css">
+    <link type="text/css" rel="stylesheet" media="screen" href="css/jquery-sakura.min.css" />
+    <link rel="icon" type="image/png" href="img/54logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css?family=M+PLUS+1p" rel="stylesheet">
+    <meta name="google-site-verification" content="hfHzgdHh9-nwiZ5nivxalNSSnv81OQd6BIiK49kXgHM" />
+    <meta content="久留米附設高校文化祭公式サイトです。">
+    <meta property="og:title" content="第54回男く祭 - 久留米附設高校文化祭公式サイト">
+    <meta property="og:description" content="久留米附設高校文化祭公式サイトです。">
+    <meta property="og:image" content="img/54logo.png">
+    <meta property="og:locale" content="ja_JP">
+    <link rel="icon" href="img/logo.png">
+    <style>
+    @keyframes roll {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+    }
+
+    .roll-animation {
+    animation: roll 2s infinite;
+    }
+    .box2{
+        background-color: white;
+        padding: 100px;
+        border-radius: 5px;
+
+        text-align: center;
+    } 
+    h1{
+        font-size: 60px;
+    }
+    button{
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        outline: none;
+        padding: 0;
+        appearance: none;
+    }    
+    body {
+      touch-action: manipulation;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      margin: 0;
+      height: 100vh;
+      background-color: #e8ecef;
+      font-family: "fontpo"; 
+    }
+    </style>
+    <script>
+        const items = [
+            "妖怪エンタルピー",
+            "맛있다",
+            "国語企画・社会企画",
+            "数学企画",
+            "討論会",
+            "百人一首部",
+            "クイズ・ディベート部",
+            "文芸同好会",
+            "鉄道企画",
+            "謎解きラリー",
+            "アミューズメントパーク",
+            "人生ゲーム",
+            "Mickey D's BURGER",
+            "黒板アート",
+            "附印良品",
+            "No Sugar, No Life Ⅱ",
+            "紬気",
+            "フセツスイッチ",
+            "FuseTube",
+            "運動部",
+            "トレジャーハンティング",
+            "天文部",
+            "路上ライブ",
+            "音楽室",
+            "理科・化学部企画(レゴ部)",
+            "公開授業",
+            "筋肉と萌",
+            "天文部プラネタリウム",
+            "参加型アート",
+            "学校関係者展",
+            "サイコロハウス",
+            "古書バザー",
+            "縁日",
+            "書道パフォーマンス",
+            "久瑠璃亭",
+            "Pie Love You",
+            "ＨＯＮＥＹ　ＴЯＡＰ",
+            "いつも（焼き）そばにいるよ",
+            "祭魂",
+            "あっぷる。",
+            "卒論展示"
+            ];
+        const item_url = [
+        "kikaku/youkaientarupi.html",
+        "mise/masitta.html",
+        "kikaku/kokugosyakai.html",
+        "kikaku/suugaku.html",
+        "kikaku/touronnkai.html",
+        "kikaku/hyakuninnissyu.html",
+        "kikaku/quiz.html",
+        "kikaku/bunngei.html",
+        "kikaku/tetsudoudoukoukai.html",
+        "kikaku/nazotokirari.html",
+        "kikaku/amyuzumennto.html",
+        "kikaku/jinnseigame.html",
+        "mise/mickeyDs.html",
+        "kikaku/kokubannart.html",
+        "mise/fusetsujirusi.html",
+        "mise/nosugarnolife.html",
+        "mise/yuzuki.html",
+        "kikaku/fusetsuswitch.html",
+        "kikaku/Fusetube.html",
+        "kikaku/unndoubu.html",
+        "kikaku/toreja.html",
+        "kikaku/tennmonnbu.html",
+        "kikaku/rojouraibu.html",
+        "kikaku/onngakusitsu.html",
+        "kikaku/rika.html",
+        "kikaku/koukaijugyou.html",
+        "mise/kinnnikutomoe.html",
+        "kikaku/puranetariumu.html",
+        "kikaku/sannkagataart.html",
+        "kikaku/gakkokannkeiysa.html",
+        "kikaku/saikorohouse.html",
+        "mise/kosyo.html",
+        "kikaku/ennnitti.html",
+        "kikaku/syodou.html",
+        "mise/kururitei.html",
+        "mise/frenchpamyupamyu.html",
+        "mise/honeytrap.html",
+        "mise/itsumosoba.html",
+        "mise/saikonn.html",
+        "mise/tapiru.html",
+        "kikaku/sotsuron.html", 
+            ];
+            // ランダムなリストアイテムを生成する関数
+        function generateItem() {
+          
+          // サイコロの回転エフェクトを適用
+          const button = document.querySelector('button');
+          button.classList.add('roll-animation');
+        
+          // 1秒後にリストアイテムを選択
+          setTimeout(() => {
+            // ランダムにリストの要素を選択
+            let random_number=Math.floor(Math.random() * items.length);
+            const randomItem = items[random_number];
+        
+            // 結果をHTMLに表示
+            document.getElementById("output").textContent = randomItem;
+
+            const urlitem = item_url[random_number];
+            document.getElementById("output-a").textContent = "ページに飛ぶ";
+            document.getElementById("output-a").setAttribute('href', urlitem);
+        
+            // サイコロの回転エフェクトを停止
+            button.classList.remove('roll-animation');
+            let randomIndex = Math.floor(Math.random() * 6);
+          $('.saikoro_random').attr('src', `js/saikoro/${String(randomIndex+1)}.jpg`);
+          }, 1000); // 1秒後に処理を実行
+        }
+        </script>
+</head>
+<body>
+    <h1>次どこに行くか</h1>
+    <div class="box2">
+<h1 id="output"></h1><br>
+<h1 class="ugoku1"><a id="output-a" href="aaa"></a></h1><br>
+<button onclick="generateItem()"><img class="saikoro_random" src="js/saikoro/1.jpg" ></button>
+<h2>↑ touch the bottun!!</h2>
+</div>
+<footer class="footer">
+    <h2 class="copyright">&copy;Otokokusai</h2>
+    <ul class="md-flex">
+      <li></li>
+    </ul>
+  </footer>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,135 +1,282 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>縦シューティングゲーム</title>
-    <style>
-        canvas {
-            border: 1px solid black;
-            display: block;
-            margin: 0 auto;
-            background-color: #000;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ゲーム</title>
+  <style>
+    @font-face {
+      font-family: 'fontpo';
+      src: url('img/FOT-NANSTD-L.otf') format('opentype');
+    }
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      height: 70vh;
+      margin: 0;
+      background-color: #e8ecef;
+      font-family: "fontpo"; 
+    }
+    .game {
+      position: relative;
+    }
+    canvas {
+      height: calc(100vh - 160px);
+      border: 1px solid #ccc;
+      margin-bottom: 10px;
+    }
+    #controls {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .btn-row {
+      display: flex;
+      justify-content: space-around;
+      width: 100%;
+    }
+    button {
+      font-family: "fontpo"; 
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 20%;
+      margin: 5px;
+    }
+    .red {
+      background-color: #DA3C27;
+      color: #ffffff;
+    }
+    .yellow {
+      background-color: #EDD457;
+      color: #ffffff;
+    }
+    .blue {
+      background-color: #1E3E6F;
+      color: #ffffff;
+    }
+  </style>
 </head>
 <body>
-    <canvas id="gameCanvas" width="400" height="600"></canvas>
-    <script>
-        const canvas = document.getElementById("gameCanvas");
-        const ctx = canvas.getContext("2d");
+  <div class="game">
+    <canvas id="tetrisCanvas" width="300" height="600"></canvas>
+    <div id="controls">
+      <div class="btn-row">
+        <button class="blue" id="rotateBtn">↻</button>
+      </div>
+      <div class="btn-row">
+        <button class="red" id="leftBtn">←</button>
+        <button class="yellow" id="downBtn">↓</button>
+        <button class="blue" id="rightBtn">→</button>
+      </div>
+    </div>
+    <div id="level">Level: 1</div>
+  </div>
+  <script>
+    const canvas = document.getElementById('tetrisCanvas');
+    const context = canvas.getContext('2d');
+    const levelDisplay = document.getElementById('level');
+    const leftBtn = document.getElementById('leftBtn');
+    const rightBtn = document.getElementById('rightBtn');
+    const rotateBtn = document.getElementById('rotateBtn');
+    const downBtn = document.getElementById('downBtn');
 
-        const player = {
-            x: canvas.width / 2,
-            y: canvas.height - 50,
-            width: 50,
-            height: 50,
-            speed: 6,
-            lastBulletTime: 0
-        };
+    const ROWS = 20;
+    const COLUMNS = 10;
+    const BLOCK_SIZE = 30;
+    const COLORS = ['#EDD457', '#DA3C27', '#1E3E6F', '#E9EDEF', '#1E3E6F', '#DA3C27', '#EDD457', '#E9EDEF'];
 
-        let bullets = [];
-        let enemies = [];
+    class TetrisGame {
+      constructor() {
+        this.board = Array.from({ length: ROWS }, () => Array(COLUMNS).fill(0));
+        this.currentPiece = null;
+        this.intervalId = null;
+        this.level = 1;
+        this.speed = 500;
+      }
 
-        function spawnEnemy() {
-            const enemy = {
-                x: Math.random() * canvas.width,
-                y: 0,
-                width: 30,
-                height: 30,
-                speed: Math.random() * 4 + 2,
-                lastBulletTime: 0
-            };
-            enemies.push(enemy);
-        }
+      drawBlock(x, y, color) {
+        context.fillStyle = color;
+        context.fillRect(x * BLOCK_SIZE, y * BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
+        context.strokeStyle = '#000';
+        context.strokeRect(x * BLOCK_SIZE, y * BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
+      }
 
-        function gameLoop() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-            ctx.fillStyle = "#00ff00"; // プレイヤーの色を緑に変更
-            ctx.fillRect(player.x, player.y, player.width, player.height);
-
-            ctx.fillStyle = "#ff0000"; // 弾の色を赤に変更
-            bullets.forEach(bullet => {
-                ctx.fillRect(bullet.x, bullet.y, 5, 15);
-            });
-
-            ctx.fillStyle = "#ffff00"; // 敵の色を黄色に変更
-            enemies.forEach(enemy => {
-                ctx.fillRect(enemy.x, enemy.y, enemy.width, enemy.height);
-            });
-
-            bullets.forEach(bullet => {
-                bullet.y -= 10;
-            });
-
-            enemies.forEach(enemy => {
-                enemy.y += enemy.speed;
-            });
-
-            bullets.forEach((bullet, bulletIndex) => {
-                enemies.forEach((enemy, enemyIndex) => {
-                    if (
-                        bullet.x < enemy.x + enemy.width &&
-                        bullet.x + 5 > enemy.x &&
-                        bullet.y < enemy.y + enemy.height &&
-                        bullet.y + 15 > enemy.y
-                    ) {
-                        bullets.splice(bulletIndex, 1);
-                        enemies.splice(enemyIndex, 1);
-                    }
-                });
-            });
-
-            enemies.forEach((enemy, enemyIndex) => {
-                if (
-                    player.x < enemy.x + enemy.width &&
-                    player.x + player.width > enemy.x &&
-                    player.y < enemy.y + enemy.height &&
-                    player.y + player.height > enemy.y
-                ) {
-                    alert("ゲームオーバー");
-                    document.location.reload();
-                }
-            });
-
-            if (Math.random() < 0.03) {
-                spawnEnemy();
+      drawBoard() {
+        this.board.forEach((row, rowIndex) => {
+          row.forEach((value, colIndex) => {
+            if (value !== 0) {
+              this.drawBlock(colIndex, rowIndex, COLORS[value - 1]);
             }
-
-            // 弾を定期的に発射
-            const currentTime = Date.now();
-            if (currentTime - player.lastBulletTime > 500) {
-                const bullet = {
-                    x: player.x + player.width / 2 - 2.5,
-                    y: player.y
-                };
-                bullets.push(bullet);
-                player.lastBulletTime = currentTime;
-            }
-
-            enemies.forEach(enemy => {
-                if (currentTime - enemy.lastBulletTime > Math.random() * 2000 + 1000) {
-                    const bullet = {
-                        x: enemy.x + enemy.width / 2 - 2.5,
-                        y: enemy.y + enemy.height
-                    };
-                    bullets.push(bullet);
-                    enemy.lastBulletTime = currentTime;
-                }
-            });
-
-            requestAnimationFrame(gameLoop);
-        }
-
-        gameLoop();
-
-        // マウスの座標にプレイヤーを移動させる
-        canvas.addEventListener("mousemove", event => {
-            const mouseX = event.clientX - canvas.getBoundingClientRect().left;
-            player.x = mouseX - player.width / 2;
+          });
         });
+      }
 
-    </script>
+      draw() {
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        this.drawBoard();
+        this.drawPiece();
+      }
+
+      drawPiece() {
+        if (!this.currentPiece) return;
+        this.currentPiece.shape.forEach((row, rowIndex) => {
+          row.forEach((value, colIndex) => {
+            if (value !== 0) {
+              this.drawBlock(this.currentPiece.x + colIndex, this.currentPiece.y + rowIndex, COLORS[this.currentPiece.color - 1]);
+            }
+          });
+        });
+      }
+
+      moveDown() {
+        if (!this.currentPiece) return;
+        this.currentPiece.y++;
+        if (this.collision()) {
+          this.currentPiece.y--;
+          this.placePiece();
+          this.checkForLines();
+          this.spawnPiece();
+          if (this.collision()) {
+            clearInterval(this.intervalId);
+            alert('Game Over!');
+          }
+        }
+      }
+
+      moveLeft() {
+        if (!this.currentPiece) return;
+        this.currentPiece.x--;
+        if (this.collision()) {
+          this.currentPiece.x++;
+        }
+      }
+
+      moveRight() {
+        if (!this.currentPiece) return;
+        this.currentPiece.x++;
+        if (this.collision()) {
+          this.currentPiece.x--;
+        }
+      }
+
+      rotate() {
+        if (!this.currentPiece) return;
+        const originalShape = this.currentPiece.shape;
+        const rotatedShape = [];
+        for (let row = 0; row < originalShape[0].length; row++) {
+          rotatedShape[row] = [];
+          for (let col = 0; col < originalShape.length; col++) {
+            rotatedShape[row][col] = originalShape[originalShape.length - col - 1][row];
+          }
+        }
+        this.currentPiece.shape = rotatedShape;
+        if (this.collision()) {
+          this.currentPiece.shape = originalShape;
+        }
+      }
+
+      collision() {
+        if (!this.currentPiece) return false;
+        for (let row = 0; row < this.currentPiece.shape.length; row++) {
+          for (let col = 0; col < this.currentPiece.shape[row].length; col++) {
+            if (
+              this.currentPiece.shape[row][col] !== 0 &&
+              (this.board[this.currentPiece.y + row] && this.board[this.currentPiece.y + row][this.currentPiece.x + col]) !== 0
+            ) {
+              return true;
+            }
+          }
+        }
+        return false;
+      }
+
+      placePiece() {
+        if (!this.currentPiece) return;
+        this.currentPiece.shape.forEach((row, rowIndex) => {
+          row.forEach((value, colIndex) => {
+            if (value !== 0) {
+              this.board[this.currentPiece.y + rowIndex][this.currentPiece.x + colIndex] = this.currentPiece.color;
+            }
+          });
+        });
+      }
+
+      checkForLines() {
+        for (let row = ROWS - 1; row >= 0; row--) {
+          if (this.board[row].every(cell => cell !== 0)) {
+            this.board.splice(row, 1);
+            this.board.unshift(Array(COLUMNS).fill(0));
+            this.updateLevelAndSpeed();
+          }
+        }
+      }
+
+      updateLevelAndSpeed() {
+        this.level++;
+        this.speed = Math.max(100, 500 - (this.level - 1) * 50);
+        levelDisplay.innerText = `Level: ${this.level}`;
+        clearInterval(this.intervalId);
+        this.intervalId = setInterval(() => {
+          this.moveDown();
+          this.draw();
+        }, this.speed);
+      }
+
+      spawnPiece() {
+        const randomIndex = Math.floor(Math.random() * COLORS.length);
+        this.currentPiece = {
+          shape: this.getRandomShape(),
+          x: Math.floor(COLUMNS / 2) - 1,
+          y: 0,
+          color: randomIndex + 1,
+        };
+      }
+
+      getRandomShape() {
+        const shapes = [
+          [[1, 1, 1, 1]],
+          [[1, 1], [1, 1]],
+          [[1, 1, 1], [0, 1, 0]],
+          [[1, 1, 1], [1, 0, 0]],
+          [[1, 1, 1], [0, 0, 1]],
+          [[1, 1, 0], [0, 1, 1]],
+          [[0, 1, 1], [1, 1, 0]],
+          [[1, 0], [1, 1]],
+        ];
+        return shapes[Math.floor(Math.random() * shapes.length)];
+      }
+    }
+
+    const tetrisGame = new TetrisGame();
+
+    leftBtn.addEventListener('click', () => {
+      tetrisGame.moveLeft();
+      tetrisGame.draw();
+    });
+
+    rightBtn.addEventListener('click', () => {
+      tetrisGame.moveRight();
+      tetrisGame.draw();
+    });
+
+    rotateBtn.addEventListener('click', () => {
+      tetrisGame.rotate();
+      tetrisGame.draw();
+    });
+
+    downBtn.addEventListener('click', () => {
+      tetrisGame.moveDown();
+      tetrisGame.draw();
+    });
+
+    tetrisGame.spawnPiece();
+    tetrisGame.intervalId = setInterval(() => {
+      tetrisGame.moveDown();
+      tetrisGame.draw();
+    }, tetrisGame.speed);
+
+  </script>
 </body>
 </html>

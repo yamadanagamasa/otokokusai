@@ -92,9 +92,7 @@ body{
   @media (min-height:900px) {
     .maintitle {
       background-image:url("../img/main.jpg");
-      background-size:40%;
-      font-size: 50px;
-      line-height: 100px;
+      background-size:80%;
       animation: bgiLoop 500s linear infinite;
     }
     @keyframes bgiLoop {
@@ -238,10 +236,11 @@ body{
               width: 100%;
               background-color: rgb(255, 255, 255);
               opacity: 0.9;
+
             }
             .right_content {
               display: flex;
-              gap: 5%;
+              gap: 7%;
             }
             .right_content p{
               margin-left: 1%;
@@ -252,8 +251,7 @@ body{
             }
             .logo{
               text-align: right;
-              width: 10%;
-              height: 10%;
+              width: 12%;
               padding: 1%;
             }
           }
