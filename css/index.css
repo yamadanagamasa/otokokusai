@@ -20,7 +20,7 @@ html {
   src: url('../img/FOT-NANSTD-L.otf') format('opentype');
 }
 /* 基本 */
-a:link, a:visited, a:hover, a:active {
+a {
   color: black;
 }
 body{

@@ -73,11 +73,11 @@
   font-weight: bold;
 }
 .yellow{
-  color:#EDD457;
+  color:#d0b842;
   font-weight: bold;
 }
 .blue{
-  color:#1E3E6F;
+  /* color:#1E3E6F; */
   font-weight: bold;
 }
 @media (max-height: 900px){

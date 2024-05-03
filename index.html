@@ -21,23 +21,23 @@
     <meta property="og:locale" content="ja_JP">
     <link rel="icon" href="img/logo.png">
     <script>
-      function showRestTime() {
-        const now = new Date();
-        const goal = new Date(2024, 3, 30);
+      // function showRestTime() {
+      //   const now = new Date();
+      //   const goal = new Date(2024, 3, 30);
 
-        const restMillisecond = goal.getTime() - now.getTime();
-        const day = Math.floor(restMillisecond / 1000 / 60 / 60 / 24);
-        const hour = Math.floor(restMillisecond / 1000 / 60 / 60) % 24;
-        const minute = Math.floor(restMillisecond / 1000 / 60) % 60;
-        const second = Math.floor(restMillisecond / 1000) % 60;
+      //   const restMillisecond = goal.getTime() - now.getTime();
+      //   const day = Math.floor(restMillisecond / 1000 / 60 / 60 / 24);
+      //   const hour = Math.floor(restMillisecond / 1000 / 60 / 60) % 24;
+      //   const minute = Math.floor(restMillisecond / 1000 / 60) % 60;
+      //   const second = Math.floor(restMillisecond / 1000) % 60;
 
-        document.getElementById('day').textContent = day;
-        document.getElementById('hour').textContent = hour;
-        document.getElementById('minute').textContent = String(minute).padStart(2, '0');
-        document.getElementById('second').textContent = String(second).padStart(2, '0');
-      }
+      //   document.getElementById('day').textContent = day;
+      //   document.getElementById('hour').textContent = hour;
+      //   document.getElementById('minute').textContent = String(minute).padStart(2, '0');
+      //   document.getElementById('second').textContent = String(second).padStart(2, '0');
+      // }
 
-      setInterval(showRestTime, 1000);
+      // setInterval(showRestTime, 1000);
     </script>
 </head>
 <body>
@@ -96,9 +96,8 @@
         <div class="margin-side">
           <!-- 日定 -->
           <div class="hannari  box17 text1">
-                <p class="date countdown">4月29日(月・祝) 9:00-14:30</p>
-            <p class="timer countdown">文化祭まで
-              <span id="day"></span>日
+                <p class="date countdown">4月29日 9:00-14:30</p>
+            <p class="timer red">雨のため変更があります。
             </p>
           </div>
           <br>
@@ -123,6 +122,8 @@
           </div>
           <br>
           <h1 class="subtitle fadein2 " id="Map">マップ</h1>
+          <span class="red">雨天のため赤色の箇所は場所が変更されております。個別ページから場所を確認してください。</span><br>
+          <span class="yellow">雨天のため黄色の箇所は中止となっております。</span>
           <!-- 体育館 -->
           <div class="area ">
             <div class="map1 timetable fadein2">
@@ -157,22 +158,22 @@
               <div class="map_item">
                 <h2>東棟</h2>
                 <a href="kikaku/rika.html" class="ugoku1 blue">①化学部・レゴ企画</a><br>
-                <a href="kikaku/ennnitti.html" class="ugoku1 blue">②縁日</a><br>
-                <a  class="ugoku1">③フードコート</a><br>
-                <a href="kikaku/rojouraibu.html" class="ugoku1 blue">④路上ライブ</a><br>
-                <a href="kikaku/syodou.html" class="ugoku1 blue">⑤書道パフォーマンス</a><br>
+                <a href="kikaku/ennnitti.html" class="ugoku1 red">②縁日</a><br>
+                <a  class="ugoku1 yellow">③フードコート</a><br>
+                <a href="kikaku/rojouraibu.html" class="ugoku1 red">④路上ライブ</a><br>
+                <a href="kikaku/syodou.html" class="ugoku1 yellow">⑤書道パフォーマンス</a><br>
                 <a href="mise/kururitei.html" class="ugoku1 blue">⑥久瑠璃亭	</a><br>
                 <a href="mise/frenchpamyupamyu.html" class="ugoku1 blue">⑦Pie Love You</a><br>
                 <br>
                 <h2>屋外</h2>
                 <a href="mise/saikonn.html" class="ugoku1 blue">⑧祭魂</a><br>
-                <a href="mise/itsumosoba.html" class="ugoku1 blue">⑨いつも（焼き）そばにいるよ</a><br>
-                <a href="mise/tapiru.html" class="ugoku1 blue">⑩あっぷる。</a><br>
-                <a href="mise/honeytrap.html" class="ugoku1 blue">⑪ＨＯＮＥＹ　ＴЯＡＰ</a><br>
+                <a href="mise/itsumosoba.html" class="ugoku1 red">⑨いつも（焼き）そばにいるよ</a><br>
+                <a href="mise/tapiru.html" class="ugoku1 red">⑩あっぷる。</a><br>
+                <a href="mise/honeytrap.html" class="ugoku1 red">⑪ＨＯＮＥＹ　ＴЯＡＰ</a><br>
                 <a  class="ugoku1">⑫憩いの森休憩所</a><br>
                 <a href="kikaku/unndoubu.html" class="ugoku1 blue">⑬運動部</a><br>
-                <a href="kikaku/toreja.html" class="ugoku1 blue">⑭トレジャーハンティング</a><br>
-                <a href="kikaku/tennmonnbu.html" class="ugoku1 blue">⑮天文部企画</a><br>
+                <a href="kikaku/toreja.html" class="ugoku1 red">⑭トレジャーハンティング</a><br>
+                <a href="kikaku/tennmonnbu.html" class="ugoku1 yellow">⑮天文部企画</a><br>
                 
                 
               </div>
@@ -273,7 +274,7 @@
           <div class="area ">
             <div class="map1 timetable fadein2">
               <div class="map_item">
-                <h2>野外ステージ</h2>
+                <h2>多目的室</h2>
                 <h4>9:00~9:30</h4><a href="dasimono/openingact.html" class="ugoku1">OPENING ACT</a>
                 <h4>9:40~10:10</h4><a href="dasimono/syutyou.html" class="ugoku1">附設生の主張</a>
                 <h4>10:20~10:50</h4><a href="dasimono/fashion.html" class="ugoku1">ファッションショー</a>
